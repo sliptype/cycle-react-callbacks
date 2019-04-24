@@ -1,23 +1,19 @@
 import xs, { Stream } from 'xstream';
-import { VNode, DOMSource } from '@cycle/dom';
 import { extractSinks } from 'cyclejs-utils';
 import isolate from '@cycle/isolate';
 
 import { driverNames } from '../drivers';
-import { Sources, Sinks, Reducer, Component } from '../interfaces';
+import { Sources, Sinks, Component } from '../interfaces';
 
 import { Counter, State as CounterState } from './counter';
-import { Speaker, State as SpeakerState } from './speaker';
 
 export interface State {
     counter?: CounterState;
-    speaker?: SpeakerState;
 }
 
 export function App(sources: Sources<State>): Sinks<State> {
     const match$ = sources.router.define({
-        '/counter': isolate(Counter, 'counter'),
-        '/speaker': isolate(Speaker, 'speaker')
+        '/counter': isolate(Counter, 'counter')
     });
 
     const componentSinks$: Stream<Sinks<State>> = match$

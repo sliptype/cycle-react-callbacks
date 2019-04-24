@@ -1,4 +1,4 @@
-import { makeDOMDriver } from '@cycle/dom';
+import { makeDOMDriver } from '@cycle/react-dom';
 import { makeHistoryDriver } from '@cycle/history';
 import { withState } from '@cycle/state';
 import { routerify } from 'cyclic-router';
@@ -8,7 +8,7 @@ import { Component } from './interfaces';
 import speechDriver from './drivers/speech';
 
 const driversFactories: any = {
-    DOM: () => makeDOMDriver('#app'),
+    react: () => makeDOMDriver(document.getElementById('app')),
     history: () => makeHistoryDriver(),
     speech: () => speechDriver
 };

@@ -1,5 +1,6 @@
 import xs, { Stream } from 'xstream';
-import { VNode, DOMSource } from '@cycle/dom';
+import { ReactSource } from '@cycle/react';
+import React, { ReactElement } from 'react';
 
 import { Sources, Sinks, Reducer } from '../interfaces';
 
@@ -16,11 +17,11 @@ interface DOMIntent {
     link$: Stream<null>;
 }
 
-export function Counter({ DOM, state }: Sources<State>): Sinks<State> {
-    const { increment$, decrement$, link$ }: DOMIntent = intent(DOM);
+export function Counter({ react, state }: Sources<State>): Sinks<State> {
+    const { increment$, decrement$, link$ }: DOMIntent = intent(react);
 
     return {
-        DOM: view(state.stream),
+        react: view(state.stream),
         state: model(increment$, decrement$),
         router: redirect(link$)
     };
@@ -44,7 +45,7 @@ function model(
     return xs.merge(init$, add$, subtract$);
 }
 
-function view(state$: Stream<State>): Stream<VNode> {
+function view(state$: Stream<State>): Stream<ReactElement> {
     return state$.map(({ count }) => (
         <div>
             <h2>My Awesome Cycle.js app - Page 1</h2>
@@ -62,16 +63,19 @@ function view(state$: Stream<State>): Stream<VNode> {
     ));
 }
 
-function intent(DOM: DOMSource): DOMIntent {
-    const increment$ = DOM.select('.add')
+function intent(react: ReactSource): DOMIntent {
+    const increment$ = react
+        .select('.add')
         .events('click')
         .mapTo(null);
 
-    const decrement$ = DOM.select('.subtract')
+    const decrement$ = react
+        .select('.subtract')
         .events('click')
         .mapTo(null);
 
-    const link$ = DOM.select('[data-action="navigate"]')
+    const link$ = react
+        .select('[data-action="navigate"]')
         .events('click')
         .mapTo(null);
 
