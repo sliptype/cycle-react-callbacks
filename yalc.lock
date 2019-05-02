@@ -1,0 +1,9 @@
+{
+  "version": "v1",
+  "packages": {
+    "cycle-react-pragma": {
+      "signature": "6a5b5d58b1cd4541d36246ef090c04db",
+      "file": true
+    }
+  }
+}

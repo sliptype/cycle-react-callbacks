@@ -1,0 +1,23 @@
+{
+  "name": "cycle-react-pragma",
+  "version": "0.0.0-6a5b5d58",
+  "description": "A JSX pragma for @cycle/react",
+  "main": "lib/cjs/index.js",
+  "typings": "lib/cjs/index.d.ts",
+  "types": "lib/cjs/index.d.ts",
+  "repository": "git@github.com:sliptype/cycle-react-pragma.git",
+  "author": "sliptype <sliptype@gmail.com>",
+  "license": "MIT",
+  "peerDependencies": {
+    "@cycle/react": "latest",
+    "@types/react": "^16.4.0",
+    "react": "^16.8.6"
+  },
+  "scripts": {
+    "prepublishOnly": "npm run compile",
+    "compile": "npm run compile-cjs && npm run compile-es6",
+    "compile-cjs": "tsc --module commonjs --outDir ./lib/cjs",
+    "compile-es6": "echo 'TODO' : tsc --module es6 --outDir ./lib/es6",
+    "test": "$(npm bin)/mocha test/*.ts --require ts-node/register --recursive"
+  }
+}

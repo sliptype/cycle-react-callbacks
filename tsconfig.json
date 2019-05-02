@@ -4,6 +4,7 @@
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
     "jsx": "react",
+    "jsxFactory": "CycleReactPragma",
     "lib": ["ES6", "ES5", "DOM"],
     "module": "ES6",
     "moduleResolution": "node",
@@ -13,5 +14,6 @@
     "strictFunctionTypes": false,
     "target": "ES5"
   },
-  "exclude": ["node_modules", "build"]
+  "files": ["node_modules/cycle-react-pragma/custom-typings.d.ts"],
+  "include": ["src/**/*"]
 }
